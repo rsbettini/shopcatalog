@@ -12,8 +12,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.rsbettini.shopcatalog.dto.CategoryDTO;
 import com.rsbettini.shopcatalog.dto.ProductDTO;
+import com.rsbettini.shopcatalog.entities.Category;
 import com.rsbettini.shopcatalog.entities.Product;
+import com.rsbettini.shopcatalog.repositories.CategoryRepository;
 import com.rsbettini.shopcatalog.repositories.ProductRepository;
 import com.rsbettini.shopcatalog.services.exceptions.DatabaseException;
 import com.rsbettini.shopcatalog.services.exceptions.ResourceNotFoundException;
@@ -23,6 +26,9 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository repository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	@Transactional(readOnly = true)
 	public Page<ProductDTO> findAllPaged(PageRequest pageRequest) {
@@ -40,7 +46,7 @@ public class ProductService {
 	@Transactional
 	public ProductDTO insert(ProductDTO dto) {
 		Product entity = new Product();
-		//entity.setName(dto.getName());
+		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new ProductDTO(entity);
 	}
@@ -50,7 +56,7 @@ public class ProductService {
 		
 		try{
 			Product entity = repository.getOne(id);
-			//entity.setName(dto.getName());
+			copyDtoToEntity(dto, entity);
 			entity = repository.save(entity);
 			return new ProductDTO(entity);
 		}
@@ -70,4 +76,20 @@ public class ProductService {
 			throw new DatabaseException("Integrity violation");
 		}
 	}
+	
+	private void copyDtoToEntity(ProductDTO dto, Product entity) {
+		entity.setName(dto.getName());
+		entity.setDescription(dto.getDescription());
+		entity.setDate(dto.getDate());
+		entity.setImgUrl(dto.getImgUrl());
+		entity.setPrice(dto.getPrice());
+		
+		entity.getCategories().clear();
+		for(CategoryDTO catDto : dto.getCategories()) {
+			Category category = categoryRepository.getOne(catDto.getId());
+			entity.getCategories().add(category);
+		}
+		
+	}
+
 }
