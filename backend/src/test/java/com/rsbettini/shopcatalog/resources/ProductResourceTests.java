@@ -66,8 +66,7 @@ public class ProductResourceTests {
 		when(service.findById(nonExistingId)).thenThrow(ResourceNotFoundException.class);
 		
 		when(service.insert(any())).thenReturn(productDTO);
-		
-		
+				
 		when(service.update(eq(existingId), any())).thenReturn(productDTO);
 		when(service.update(eq(nonExistingId), any())).thenThrow(ResourceNotFoundException.class);
 				
@@ -119,8 +118,7 @@ public class ProductResourceTests {
 		
 	}
 	
-	
-	
+		
 	@Test
 	public void updateShouldReturnProductDTOWhenIdExists() throws Exception {
 		
