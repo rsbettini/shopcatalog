@@ -20,7 +20,7 @@ const ProductDetails = () => {
               ></img>
             </div>
             <div className="name-price-container">
-              <h1>Nome do producto</h1>
+              <h1>Nome do produto</h1>
               <ProductPrice price={2345.67} />
             </div>
           </div>
