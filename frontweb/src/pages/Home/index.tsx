@@ -8,9 +8,6 @@ import "./styles.css";
 const Home = () => {
   return (
     <div className="home-container">
-
-      <h1>{isAuthenticated() ? 'AUTENTICADO' : 'NÃO AUTENTICADO'}</h1>
-
       <div className="base-card home-card">
         <div className="home-content-container">
           <div>
@@ -22,7 +19,7 @@ const Home = () => {
           </div>
           <div>
             <Link to="/products">
-              <ButtonIcon text="Inicie agora a sua busca"/>
+              <ButtonIcon text="Inicie agora a sua busca" />
             </Link>
           </div>
         </div>
