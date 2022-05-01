@@ -1,12 +1,13 @@
 import { Link, useHistory, useLocation } from "react-router-dom";
 import ButtonIcon from "components/ButtonIcon";
 import { useForm } from "react-hook-form";
-import { getTokenData, requestBackendLogin, saveAuthData } from "util/requests";
+import { requestBackendLogin } from "util/requests";
 import { useContext, useState } from "react";
 import { AuthContext } from "AuthContext";
+import { saveAuthData } from "util/storage";
+import { getTokenData } from "util/auth";
 
 import "./styles.css";
-
 
 type FormData = {
   username: string;
@@ -14,15 +15,14 @@ type FormData = {
 };
 
 type LocationState = {
-  from:string;
-}
+  from: string;
+};
 
 const Login = () => {
+  const location = useLocation<LocationState>();
 
-  const location =useLocation<LocationState>();
+  const { from } = location.state || { from: { pathname: "/admin" } };
 
-  const { from } = location.state || {from: { pathname: '/admin'}};
-  
   const { setAuthContextData } = useContext(AuthContext);
 
   const [hasError, setHasError] = useState(false);
@@ -43,7 +43,7 @@ const Login = () => {
         setAuthContextData({
           authenticated: true,
           tokenData: getTokenData(),
-        })
+        });
         history.replace(from);
       })
       .catch((error) => {
@@ -69,7 +69,9 @@ const Login = () => {
               },
             })}
             type="text"
-            className={`form-control base-input ${errors.username ? 'is-invalid' : ''}`}
+            className={`form-control base-input ${
+              errors.username ? "is-invalid" : ""
+            }`}
             placeholder="Email"
             name="username"
           />
@@ -83,7 +85,9 @@ const Login = () => {
               required: "Campo obrigatório",
             })}
             type="password"
-            className={`form-control base-input ${errors.password ? 'is-invalid' : ''}`}
+            className={`form-control base-input ${
+              errors.password ? "is-invalid" : ""
+            }`}
             placeholder="Password"
             name="password"
           />
