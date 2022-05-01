@@ -3,7 +3,7 @@ import qs from "qs";
 import history from "./history";
 import jwtDecode from "jwt-decode";
 
-type Role = "ROLE_OPERATOR" | "ROLE_ADMIN";
+export type Role = "ROLE_OPERATOR" | "ROLE_ADMIN";
 
 export type TokenData = {
   exp: number;
@@ -96,7 +96,7 @@ axios.interceptors.response.use(
     return response;
   },
   function (error) {
-    if (error.response.status === 401 || error.response.status === 403) {
+    if (error.response.status === 401) {
       history.push("/admin/auth");
     }
     return Promise.reject(error);
@@ -125,7 +125,7 @@ export const hasAnyRoles = (roles: Role[]) : boolean => {
 
   const tokenData = getTokenData();
 
-  /* Form mais exuta de impekentar a verificação
+  /* Forma mais exuta de implementar a verificação
   if (tokenData !== undefined) {
     return roles.some(role => tokenData.authorities.includes(role));
   }*/
