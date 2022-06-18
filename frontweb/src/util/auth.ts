@@ -13,11 +13,6 @@ export const hasAnyRoles = (roles: Role[]): boolean => {
 
   const tokenData = getTokenData();
 
-  /* Forma mais exuta de implementar a verificação
-    if (tokenData !== undefined) {
-      return roles.some(role => tokenData.authorities.includes(role));
-    }*/
-
   if (tokenData !== undefined) {
     for (var i = 0; i < roles.length; i++) {
       if (tokenData.authorities.includes(roles[i])) {
@@ -25,6 +20,11 @@ export const hasAnyRoles = (roles: Role[]): boolean => {
       }
     }
   }
+
+  /* Forma mais exuta de implementar a verificação
+    if (tokenData !== undefined) {
+      return roles.some(role => tokenData.authorities.includes(role));
+    }*/
 
   return false;
 };
