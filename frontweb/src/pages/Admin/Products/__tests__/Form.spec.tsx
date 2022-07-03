@@ -40,7 +40,7 @@ describe("Product form create tests", () => {
 
     const submitButton = screen.getByRole("button", { name: /salvar/i });
 
-    await selectEvent.select(categoriesInput, ["Electronics", "Computers"]);
+    await selectEvent.select(categoriesInput, ["Eletrônicos", "Computadores"]);
     userEvent.type(nameInput, "Computador");
     userEvent.type(priceInput, "5000.12");
     userEvent.type(imgUrlInput, "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg");
@@ -95,7 +95,7 @@ describe("Product form create tests", () => {
     const descriptionInput = screen.getByTestId("description");
     const categoriesInput = screen.getByLabelText("Categorias");
 
-    await selectEvent.select(categoriesInput, ["Electronics", "Computers"]);
+    await selectEvent.select(categoriesInput, ["Eletrônicos", "Computadores"]);
     userEvent.type(nameInput, "Computador");
     userEvent.type(priceInput, "5000.12");
     userEvent.type(imgUrlInput, "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg");

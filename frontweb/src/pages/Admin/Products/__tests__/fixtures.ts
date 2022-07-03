@@ -6,15 +6,15 @@ const findCategoriesResponse = {
   content: [
     {
       id: 1,
-      name: "Books",
+      name: "Livros",
     },
     {
       id: 2,
-      name: "Electronics",
+      name: "Eletrônicos",
     },
     {
       id: 3,
-      name: "Computers",
+      name: "Computadores",
     },
   ],
   pageable: {
@@ -56,11 +56,11 @@ export const productResponse = {
   categories: [
     {
       id: 2,
-      name: "Electronics",
+      name: "Eletrônicos",
     },
     {
       id: 3,
-      name: "Computers",
+      name: "Computadores",
     },
   ],
 };
